@@ -1,0 +1,44 @@
+# Node modules
+**/node_modules
+
+# Environment variables
+.env
+
+# Build directories
+**/dist
+**/build
+**/.next
+**/out
+
+# Dependency directories
+**/node_modules/
+
+# IDE/Editor directories and files
+.vscode/
+
+
+# MongoDB data
+**/mongo-data
+**/data/db
+
+# API Gateway
+api-gateway/node_modules
+api-gateway/logs
+api-gateway/.env
+
+# Auth API
+api-auth/node_modules
+api-auth/logs
+api-auth/.env
+
+# Business API
+api-business/node_modules
+api-business/logs
+api-business/.env
+
+# Next.js Front-end
+nextjs-front/node_modules
+nextjs-front/.next
+nextjs-front/out
+nextjs-front/logs
+nextjs-front/.env
