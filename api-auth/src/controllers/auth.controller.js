@@ -58,6 +58,21 @@ const authLogin = async (email, password) => {
   }
 };
 
+const getUserByAuthId = async (authId) => {
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+    const { data, error } = await supabase.from('user').select('*').eq('auth_id', authId).single();
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+};
+
 //--------------------------------------------------
 
 async function getAuth(req, reply, fastify) {
@@ -97,4 +112,30 @@ async function postLogin(req, reply, fastify) {
   reply.status(400).send({ error: 'Failed to login' });
 }
 
-export { getAuth, postSignup, postLogin };
+async function deleteUser(req, reply, fastify) {}
+
+async function getUser(req, reply, fastify) {
+  try {
+    let authHeader = req.headers.authorization;
+
+    if (!authHeader) reply.status(401).send({ message: 'Unauthorized' });
+
+    const token = authHeader.split(' ')[1];
+
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+    let { data, error } = await supabase.auth.getUser(token);
+    if (error) reply.status(401).send({ message: 'Unauthorized' });
+
+    let authId = data.user.id;
+    let user = await getUserByAuthId(authId);
+    console.log(user);
+    reply.send(user);
+  } catch (err) {
+    reply.status(401).send({ message: 'Unauthorized' });
+  }
+}
+
+export { getAuth, postSignup, postLogin, deleteUser, getUser };
