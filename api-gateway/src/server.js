@@ -29,26 +29,27 @@ const getUserByAuthId = async (authId) => {
 fastify.addHook('onRequest', async (request, reply) => {
   if (request.raw.url.startsWith('/auth')) {
     return;
-  }
-  try {
-    let authHeader = request.headers.authorization;
+  } else {
+    try {
+      let authHeader = request.headers.authorization;
 
-    if (!authHeader) reply.status(401).send({ message: 'Unauthorized' });
+      if (!authHeader) reply.status(401).send({ message: 'Unauthorized' });
 
-    const token = authHeader.split(' ')[1];
+      const token = authHeader.split(' ')[1];
 
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
-    let { data, error } = await supabase.auth.getUser(token);
-    if (error) reply.status(401).send({ message: 'Unauthorized' });
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      );
+      let { data, error } = await supabase.auth.getUser(token);
+      if (error) reply.status(401).send({ message: 'Unauthorized' });
 
-    let authId = data.user.id;
-    let user = await getUserByAuthId(authId);
-    return;
-  } catch (err) {
-    reply.status(401).send({ message: 'Unauthorized' });
+      let authId = data.user.id;
+      let user = await getUserByAuthId(authId);
+      return;
+    } catch (err) {
+      reply.status(401).send({ message: 'Unauthorized' });
+    }
   }
 });
 
