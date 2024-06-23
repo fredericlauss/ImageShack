@@ -15,7 +15,6 @@ services:
       - "3001:3001"
     environment:
       - JWT_SECRET=${JWT_SECRET}
-      - JWT_SECRET=${JWT_SECRET}
 
   api-business:
     build: ./api-business
