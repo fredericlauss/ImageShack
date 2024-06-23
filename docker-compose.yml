@@ -6,6 +6,8 @@ services:
       - "3000:3000"
     environment:
       - JWT_SECRET=${JWT_SECRET}
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
     depends_on:
       - api-auth
 
@@ -15,7 +17,8 @@ services:
       - "3001:3001"
     environment:
       - JWT_SECRET=${JWT_SECRET}
-
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
   api-business:
     build: ./api-business
     ports:
