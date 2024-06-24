@@ -1,30 +1,30 @@
 version: "3"
 services:
-  api-gateway:
-    build: ./api-gateway
-    ports:
-      - "3000:3000"
-    environment:
-      - JWT_SECRET=${JWT_SECRET}
-      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
-      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
-    depends_on:
-      - api-auth
+  # api-gateway:
+  #   build: ./api-gateway
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - JWT_SECRET=${JWT_SECRET}
+  #     - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+  #     - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+  #   depends_on:
+  #     - api-auth
 
-  api-auth:
-    build: ./api-auth
-    ports:
-      - "3001:3001"
-    environment:
-      - JWT_SECRET=${JWT_SECRET}
-      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
-      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
-  api-business:
-    build: ./api-business
-    ports:
-      - "3002:3002"
-    environment:
-      - JWT_SECRET=${JWT_SECRET}
+  # api-auth:
+  #   build: ./api-auth
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     - JWT_SECRET=${JWT_SECRET}
+  #     - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+  #     - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+  # api-business:
+  #   build: ./api-business
+  #   ports:
+  #     - "3002:3002"
+  #   environment:
+  #     - JWT_SECRET=${JWT_SECRET}
 
   nextjs-front:
     build: ./next-front
@@ -35,3 +35,5 @@ services:
       - API_GATEWAY_URL=http://api-gateway:3000
       - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
       - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
