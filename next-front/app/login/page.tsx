@@ -45,14 +45,7 @@ export default function Login({
     });
 
     if (error) {
-      return redirect("/login?message=Could not authenticate user");
-    }
-
-    const { error: errorUser } = await supabase
-      .from("user")
-      .insert({ email, password });
-
-    if (errorUser) {
+      console.log(error);
       return redirect("/login?message=Could not authenticate user");
     }
 

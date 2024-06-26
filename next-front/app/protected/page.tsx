@@ -1,4 +1,5 @@
 import AuthButton from "@/components/AuthButton";
+import Uploader from "@/components/uploader";
 import { createClient } from "@/utils/supabase/server";
 import { createClientDelete } from "@/utils/supabase/serverDelete";
 import { redirect } from "next/navigation";
@@ -53,6 +54,8 @@ export default async function ProtectedPage() {
             </button>
           </form>
           <h2 className="font-bold text-4xl mb-4">Hey, {user.email}!</h2>
+
+          <Uploader user={user} />
         </main>
       </div>
       <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
