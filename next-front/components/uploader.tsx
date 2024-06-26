@@ -53,8 +53,6 @@ export default async function Uploader(user: any) {
 
   const handleUpload = () => {
     if (uppy.getFiles().length !== 0) {
-      const randomUUID = crypto.randomUUID();
-
       uppy.setFileMeta(uppy.getFiles()[0].id, {
         objectName: uppy.getFiles()[0].name,
       });
