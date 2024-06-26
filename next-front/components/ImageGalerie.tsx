@@ -27,7 +27,7 @@ export default async function ImageGalerie(user: any) {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {posts?.map((post) => {
           return (
             <div

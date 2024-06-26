@@ -54,7 +54,6 @@ export default async function ProtectedPage() {
               Delete user
             </button>
           </form>
-          <h2 className="font-bold text-4xl mb-4">Hey, {user.email}!</h2>
 
           <Uploader user={user} />
           <ImageGalerie user={user} />
