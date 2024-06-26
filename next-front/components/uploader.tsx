@@ -48,21 +48,20 @@ export default async function Uploader(user: any) {
 
   uppy.on("upload-success", () => {
     uppy.cancelAll();
-    document.getElementById("trigger-close")?.click();
     router.refresh();
   });
 
   const handleUpload = () => {
     if (uppy.getFiles().length !== 0) {
-      //   const randomUUID = crypto.randomUUID();
+      const randomUUID = crypto.randomUUID();
 
-      //   uppy.setFileMeta(uppy.getFiles()[0].id, {
-      //     objectName: user?.id + "/" + randomUUID + "/" + uppy.getFiles()[0].name,
-      //   });
+      uppy.setFileMeta(uppy.getFiles()[0].id, {
+        objectName: uppy.getFiles()[0].name,
+      });
 
       uppy.upload();
     } else {
-      console.error("Please adding an image");
+      console.log("Please adding an image");
     }
   };
 
