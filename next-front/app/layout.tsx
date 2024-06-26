@@ -3,7 +3,7 @@ import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+  : "http://vps-a6ce17b4.vps.ovh.net:3030";
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
