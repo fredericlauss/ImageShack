@@ -20,8 +20,33 @@ export default async function ProtectedPage() {
     "use server";
 
     const supabase = createClientDelete();
+
     const userId = formData.get("userid");
     if (!userId) return;
+
+    // Supprimer toutes les photos de l'utilisateur
+    let { data, error: imageError } = await supabase
+      .from("posts")
+      .select("name")
+      .eq("post_by", userId);
+
+    if (imageError) {
+      console.error("Error getting images:", imageError);
+      return;
+    }
+
+    if (data && data.length > 0) {
+      const pathsArray = data.map((image: { name: string }) => image.name);
+
+      const { error: bucketError } = await supabase.storage
+        .from("images")
+        .remove(pathsArray);
+
+      if (bucketError) {
+        console.error("Error deleting images from bucket:", bucketError);
+        return;
+      }
+    }
 
     // Supprime l'utilisateur d'auth
     const { error } = await supabase.auth.admin.deleteUser(userId);

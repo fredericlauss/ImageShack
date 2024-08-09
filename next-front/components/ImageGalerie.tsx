@@ -45,7 +45,8 @@ export default async function ImageGalerie(user: any) {
               <h1>@{post.post_by}</h1>
               <DeletePost
                 post_by={post.post_by}
-                image={post.object_id}
+                imageId={post.object_id}
+                imageName={post.name}
                 user={user}
               />
             </div>
